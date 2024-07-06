@@ -8,6 +8,7 @@
 - Extreme sorting into subcategories based on specific file extensions
 - Configurable categorization through JSON files
 - Test file generation for easy testing and demonstration
+- Ability to add new file extensions to existing or new categories via command-line
 
 
 ### Installation
@@ -16,7 +17,15 @@
 git clone https://github.com/BelaBartok39/Fancy_Dir.git
 cd Fancy_Dir
 pip install -r requirements.txt
-'text/plain'
+```
+```python
+python3 fancy.py [directory_to_sort]
+```
+```python
+python3 fancy.py [directory_to_sort] --extreme
+```
+```python
+python3 fancy.py -add [file_extension] [category]
 ```
 
 ### Configuration

@@ -28,6 +28,14 @@ import sys
 import argparse
 import json
 
+# TODO: Create package for script
+# TODO: Create executable that sorts the current directory 
+# TODO: Create additional categories?
+# TODO: Setup script where user can customize category folder names
+# TODO: Add option to create a new category?
+# TODO: Add option to delete a category?
+ 
+
 def load_configs(config_folder):
     configs = {}
     for filename in os.listdir(config_folder):
@@ -70,7 +78,29 @@ def organize_files(directory, configs, extreme_sort=False):
 
     print("File organization complete!")
 
+def add_extension(config_folder, extension, category):
+    config_file = os.path.join(config_folder, f"{category}_config.json")
+    
+    if os.path.exists(config_file):
+        with open(config_file, 'r+') as f:
+            config = json.load(f)
+            if extension not in config:
+                config.append(extension)
+                f.seek(0)
+                json.dump(config, f, indent=4)
+                f.truncate()
+                print(f"Added '{extension}' to '{category}' category.")
+            else:
+                print(f"'{extension}' already exists in '{category}' category.")
+    else:
+        with open(config_file, 'w') as f:
+            json.dump([extension], f, indent=4)
+        print(f"Created new category '{category}' and added '{extension}' to it.")
+
 def main():
+    
+    config_folder = 'config'
+
     parser = argparse.ArgumentParser(description='Fancy File Organizer')
     parser.add_argument('directory', nargs='?', default='.',
                         help='Directory to organize')
@@ -78,18 +108,23 @@ def main():
                         help='Enable extreme sorting by individual extensions')
     parser.add_argument('--config', default='./config',
                         help='Path to the config folder')
-    
+    parser.add_argument('--add', nargs=2, metavar=('EXT', 'CATEGORY'),
+                        help='Add a file extension to a category')
+
     args = parser.parse_args()
 
     directory = args.directory
     extreme_sort = args.extreme
     config_folder = args.config
+    
+    if args.add:
+        extension, category = args.add
+        add_extension(config_folder, extension, category)
+    else:
+        extension_map = load_configs(config_folder)
+        organize_files(directory, extension_map, extreme_sort)
 
-    config_folder = 'config'
-    extension_map = load_configs(config_folder)
-
-    organize_files(directory, extension_map, extreme_sort)
-
+    
 if __name__ == '__main__':
     main() 
 
