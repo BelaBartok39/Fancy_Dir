@@ -30,7 +30,7 @@ import json
 
 # TODO: Create package for script
 # TODO: Create executable that sorts the current directory 
-# TODO: Create additional categories?
+
 # TODO: Setup script where user can customize category folder names
 # TODO: Add option to create a new category?
 # TODO: Add option to delete a category?
@@ -58,13 +58,13 @@ def organize_files(directory, configs, extreme_sort=False):
         if os.path.isfile(file_path):
             extension = os.path.splitext(filename)[1].lower()
             
-            # First-tier sorting
+            # 'First-tier' sorting
             category = extension_to_category.get(extension, 'misc')
             category_folder = os.path.join(directory, category)
             os.makedirs(category_folder, exist_ok=True)
             
             if extreme_sort and category != 'misc':
-                # Second-tier sorting (only for non-misc categories)
+                # 'Second-tier sorting' (only for non-misc categories)
                 config_key = f"{category}_config"
                 sub_category = configs[config_key].get(extension, 'other')
                 sub_category_folder = os.path.join(category_folder, sub_category)
@@ -98,29 +98,31 @@ def add_extension(config_folder, extension, category):
         print(f"Created new category '{category}' and added '{extension}' to it.")
 
 def main():
-    
-    config_folder = 'config'
-
     parser = argparse.ArgumentParser(description='Fancy File Organizer')
     parser.add_argument('directory', nargs='?', default='.',
-                        help='Directory to organize')
+                        help='Directory to organize (default: current directory)')
     parser.add_argument('--extreme', action='store_true',
                         help='Enable extreme sorting by individual extensions')
-    parser.add_argument('--config', default='./config',
-                        help='Path to the config folder')
-    parser.add_argument('--add', nargs=2, metavar=('EXT', 'CATEGORY'),
+    parser.add_argument('-add', nargs=2, metavar=('EXT', 'CATEGORY'),
                         help='Add a file extension to a category')
 
     args = parser.parse_args()
-
-    directory = args.directory
+    directory = os.path.abspath(args.directory)
     extreme_sort = args.extreme
-    config_folder = args.config
-    
+
+    # Get the directory of the script
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    config_folder = os.path.join(script_dir, 'config')
+
     if args.add:
         extension, category = args.add
         add_extension(config_folder, extension, category)
     else:
+        if not os.path.isdir(directory):
+            print(f"Error: '{directory}' is not a valid directory.")
+            sys.exit(1)
+        
+        print(f"Organizing files in: {directory}")
         extension_map = load_configs(config_folder)
         organize_files(directory, extension_map, extreme_sort)
 

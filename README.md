@@ -9,21 +9,36 @@
 - Configurable categorization through JSON files
 - Test file generation for easy testing and demonstration
 - Ability to add new file extensions to existing or new categories via command-line
+- Sort files in a specific directory
+- Executable command for quick sorting of the current directory
 
 
 ### Installation
 ### Debian/Ubuntu
-```python
+```bash
 git clone https://github.com/BelaBartok39/Fancy_Dir.git
 cd Fancy_Dir
 pip install -r requirements.txt
+chmod +x fancy
+echo 'export PATH="$PATH:$PWD"' >> ~/.bashrc
+source ~/.bashrc
 ```
+
+### Usage
+
+Quick sort (current directory):
 ```python
-python3 fancy.py [directory_to_sort]
+fancy
 ```
+Basic Sort(Specific Directory):
 ```python
-python3 fancy.py [directory_to_sort] --extreme
+fancy /path/to/directory
 ```
+Extreme Sort:
+```python
+fancy /path/to/directory --extreme
+```
+Add a new file extension to a category:
 ```python
 python3 fancy.py -add [file_extension] [category]
 ```
@@ -44,7 +59,8 @@ You can modify these files to customize the categorization of your files.
 
 - 'FileNotFoundError': Make sure the directory you're trying to organize exists.
 - 'PermissionError': Ensure you have the necessary permissions to read from and write to the directory.
-
-
+- 'Note': The config directory must be in the same directory as the fancy.py script.
+- If the 'fancy' command is not found, make sure you've added the project directory to your PATH and sourced your .bashrc or .zshrc file.
+- If you encounter a "No such file or directory: './config'" error, ensure that the config directory is present in the same directory as the fancy.py script.
 
 
