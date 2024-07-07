@@ -103,7 +103,7 @@ def main():
                         help='Directory to organize (default: current directory)')
     parser.add_argument('--extreme', action='store_true',
                         help='Enable extreme sorting by individual extensions')
-    parser.add_argument('-add', nargs=2, metavar=('EXT', 'CATEGORY'),
+    parser.add_argument('--add', nargs=2, metavar=('EXT', 'CATEGORY'),
                         help='Add a file extension to a category')
 
     args = parser.parse_args()

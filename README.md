@@ -40,7 +40,7 @@ fancy /path/to/directory --extreme
 ```
 Add a new file extension to a category:
 ```python
-python3 fancy.py -add [file_extension] [category]
+fancy -add [file_extension] [category]
 ```
 
 ### Configuration
