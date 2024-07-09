@@ -1,5 +1,5 @@
 # Fancy Directory Sort
-<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fchriscarey.com%2Fwordpress%2Fwp-content%2Fuploads%2F2008%2F02%2FScreen-Shot-2014-08-17-at-4.22.57-PM.png&f=1&nofb=1&ipt=e581bcd003d7dde39a2aad2f1ce50606e7f98e82e2d0c690c777beca21b067df&ipo=images">
+<img src="./static/fancy.png">
 
 
 ✨ Features ✨
