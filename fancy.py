@@ -28,11 +28,7 @@ import sys
 import argparse
 import json
 
-# TODO: Create package for script
-# TODO: Create executable that sorts the current directory 
-
-# TODO: Setup script where user can customize category folder names
-# TODO: Add option to create a new category?
+# TODO: Create setup script where user can customize category folder names
 # TODO: Add option to delete a category?
  
 
@@ -40,7 +36,7 @@ def load_configs(config_folder):
     configs = {}
     for filename in os.listdir(config_folder):
         if filename.endswith('_config.json'):
-            category = filename.split('.')[0]  # This keeps the '_config' part
+            category = filename.split('.')[0] 
             with open(os.path.join(config_folder, filename), 'r') as f:
                 configs[category] = json.load(f)
     return configs
@@ -49,7 +45,7 @@ def organize_files(directory, configs, extreme_sort=False):
     # Create a mapping from file extensions to their base categories
     extension_to_category = {}
     for category, extensions in configs.items():
-        base_category = category.split('_')[0]  # Remove '_config' from the category name
+        base_category = category.split('_')[0] 
         for ext in extensions:
             extension_to_category[ext] = base_category
 
@@ -110,7 +106,7 @@ def main():
     directory = os.path.abspath(args.directory)
     extreme_sort = args.extreme
 
-    # Get the directory of the script
+    # Get the directory of the SCRIPT
     script_dir = os.path.dirname(os.path.realpath(__file__))
     config_folder = os.path.join(script_dir, 'config')
 
