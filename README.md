@@ -11,6 +11,7 @@
 - Ability to add new file extensions to existing or new categories via command-line
 - Sort files in a specific directory
 - Executable command for quick sorting of the current directory
+- Uninstall with command
 
 
 ### Installation
@@ -27,22 +28,22 @@ source ~/.bashrc
 ### Usage
 
 Quick sort (current directory):
-```python
+```bash
 fancy
 ```
 Basic Sort(Specific Directory):
-```python
+```bash
 fancy /path/to/directory
 ```
 Extreme Sort:
-```python
+```bash
 fancy /path/to/directory --extreme
 ```
 Add a new file extension to a category:
-```python
+```bash
 fancy --add [file_extension] [category]
 ```
-Uninstall Fancy!
+Uninstall all traces of Fancy:
 ```bash
 fancy --uninstall
 ```
@@ -63,8 +64,8 @@ You can modify these files to customize the categorization of your files.
 
 - 'FileNotFoundError': Make sure the directory you're trying to organize exists.
 - 'PermissionError': Ensure you have the necessary permissions to read from and write to the directory.
-- 'Note': The config directory must be in the same directory as the fancy.py script.
+- NOTE: The config directory must be in the same directory as the fancy.py script.
 - If the 'fancy' command is not found, make sure you've added the project directory to your PATH and sourced your .bashrc or .zshrc file.
 - If you encounter a "No such file or directory: './config'" error, ensure that the config directory is present in the same directory as the fancy.py script.
-
+- NOTE: The uninstall function assumes a certain installation structure. You may need to adjust it based on how your script is actually installed and where configuration files are stored.
 
