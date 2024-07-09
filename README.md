@@ -1,5 +1,5 @@
 # Fancy Directory Sort
-<img src="./static/fancy.png">
+<img src="./static/fancy_logo.png">
 
 
 ✨ Features ✨
