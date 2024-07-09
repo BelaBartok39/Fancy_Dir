@@ -42,6 +42,10 @@ Add a new file extension to a category:
 ```python
 fancy --add [file_extension] [category]
 ```
+Uninstall Fancy!
+```bash
+fancy --uninstall
+```
 
 ### Configuration
 File Organizer uses JSON configuration files to determine how to categorize files. These are located in the config directory:
